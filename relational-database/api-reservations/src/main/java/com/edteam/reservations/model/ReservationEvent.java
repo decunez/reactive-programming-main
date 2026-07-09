@@ -10,12 +10,10 @@ public final class ReservationEvent {
     private final Double price;
     private final List<String> emails;
 
-    // Constructor con copias defensivas
     public ReservationEvent(String id, String passengerName, Double price, List<String> emails) {
         this.id = id;
         this.passengerName = passengerName;
         this.price = price;
-        // Copia defensiva para proteger la inmutabilidad de la lista externa
         this.emails = (emails != null) ? new ArrayList<>(emails) : new ArrayList<>();
     }
 
