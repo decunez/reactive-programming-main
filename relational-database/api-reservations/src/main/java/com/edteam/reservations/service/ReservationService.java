@@ -81,6 +81,13 @@ public class ReservationService {
         checkCity(reservation);
 
         Reservation transformed = conversionService.convert(reservation, Reservation.class);
+
+        // CORREGIDO: Forzamos el ID de la ruta URL en la entidad
+        // para que JPA entienda que es una actualización y no un duplicado.
+        if (transformed != null) {
+            transformed.setId(id);
+        }
+
         validateEntity(transformed);
         Reservation result = repository.save(Objects.requireNonNull(transformed));
         return Mono.justOrEmpty(conversionService.convert(result, ReservationDTO.class));
